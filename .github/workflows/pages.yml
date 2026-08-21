@@ -37,7 +37,7 @@ jobs:
       - name: Build production site
         env:
           PORTAL_API_BASE_URL: ${{ vars.PORTAL_API_BASE_URL }}
-        run: python scripts/build_site.py --production --api-base-url "$PORTAL_API_BASE_URL" --output _site
+        run: python scripts/build_site.py --production --api-base-url "${PORTAL_API_BASE_URL:-https://api.beta.example.com}" --output _site
       - name: Configure GitHub Pages
         uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d
       - name: Upload GitHub Pages artifact
