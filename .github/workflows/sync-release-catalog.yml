@@ -1,0 +1,71 @@
+name: Synchronize launcher release catalog
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: Exact launcher release tag
+        required: true
+        default: v0.2.1
+        type: string
+      authorize_public:
+        description: Enable direct public package checkout
+        required: true
+        default: false
+        type: boolean
+permissions:
+  contents: write
+concurrency:
+  group: aurion-launcher-release-catalog
+  cancel-in-progress: false
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ inputs.authorize_public && 'public-release' || 'release-catalog' }}
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: '3.13'
+      - name: Build catalog from the exact GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          AUTHORITY_JSON: ${{ secrets.AURION_RELEASE_AUTHORITY_JSON }}
+        run: |
+          set -euo pipefail
+          args=()
+          if [ "${{ inputs.authorize_public }}" = "true" ]; then
+            printf '%s' "$AUTHORITY_JSON" > release-authority.json
+            args+=(--authorize-public --authority release-authority.json)
+          fi
+          python scripts/sync_release_catalog.py \
+            --repository CatalystNexusLLC/aurion_beta_launcher \
+            --tag "${{ inputs.release_tag }}" \
+            --output site/releases.json \
+            "${args[@]}"
+          python scripts/validate_portal.py
+      - name: Commit synchronized catalog
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- site/releases.json; then exit 0; fi
+          git config user.name "catalyst-nexus-release-bot"
+          git config user.email "release-bot@users.noreply.github.com"
+          git add site/releases.json
+          git commit -m "Sync AURION launcher catalog for ${{ inputs.release_tag }}"
+          git push origin HEAD:main
+      - name: Synchronize SQL ledger catalog
+        env:
+          PORTAL_API_URL: ${{ secrets.PORTAL_API_URL }}
+          PORTAL_RELEASE_SYNC_TOKEN: ${{ secrets.PORTAL_RELEASE_SYNC_TOKEN }}
+        run: |
+          set -euo pipefail
+          if [ -z "$PORTAL_API_URL" ] || [ -z "$PORTAL_RELEASE_SYNC_TOKEN" ]; then exit 0; fi
+          curl --fail --show-error --silent --retry 3 \
+            -H "Content-Type: application/json" \
+            -H "X-Release-Sync-Token: $PORTAL_RELEASE_SYNC_TOKEN" \
+            --data-binary @site/releases.json \
+            "$PORTAL_API_URL/api/admin/releases/sync"

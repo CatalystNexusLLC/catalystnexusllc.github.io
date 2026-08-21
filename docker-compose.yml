@@ -1,0 +1,41 @@
+services:
+  database:
+    image: postgres:17.6-alpine
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - aurion-beta-postgres:/var/lib/postgresql/data
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/001-schema.sql:ro
+      - ./database/reporting.sql:/docker-entrypoint-initdb.d/002-reporting.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks: [backend]
+
+  api:
+    build:
+      context: ./api
+    restart: unless-stopped
+    env_file: .env
+    depends_on:
+      database:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:8080:8080"
+    read_only: true
+    tmpfs:
+      - /tmp:size=64m,mode=1777
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    networks: [backend]
+
+volumes:
+  aurion-beta-postgres:
+
+networks:
+  backend:
+    internal: true

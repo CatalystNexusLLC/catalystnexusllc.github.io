@@ -1,0 +1,113 @@
+{
+  "assets": [
+    {
+      "download_url": "https://github.com/CatalystNexusLLC/aurion_beta_launcher/releases/download/v0.2.1/CatalystNexus_AURION_Beta_Launcher_v0.2.1.zip",
+      "enabled": false,
+      "key": "complete",
+      "kind": "complete-release",
+      "label": "Complete release ZIP",
+      "name": "CatalystNexus_AURION_Beta_Launcher_v0.2.1.zip",
+      "platform": "windows-macos-linux",
+      "sha256": null,
+      "size_bytes": null
+    },
+    {
+      "download_url": "https://github.com/CatalystNexusLLC/aurion_beta_launcher/releases/download/v0.2.1/AURION-Beta-Launcher-v0.2.1.pyz",
+      "enabled": false,
+      "key": "universal",
+      "kind": "python-zipapp",
+      "label": "Universal Python launcher",
+      "name": "AURION-Beta-Launcher-v0.2.1.pyz",
+      "platform": "python-3.11-3.14",
+      "sha256": null,
+      "size_bytes": null
+    },
+    {
+      "download_url": "https://github.com/CatalystNexusLLC/aurion_beta_launcher/releases/download/v0.2.1/CatalystNexus_AURION_Beta_Launcher_PDFs_v0.2.1.zip",
+      "enabled": false,
+      "key": "pdfs",
+      "kind": "pdf-bundle",
+      "label": "Release documentation PDFs",
+      "name": "CatalystNexus_AURION_Beta_Launcher_PDFs_v0.2.1.zip",
+      "platform": "documentation",
+      "sha256": null,
+      "size_bytes": null
+    },
+    {
+      "download_url": "https://github.com/CatalystNexusLLC/aurion_beta_launcher/releases/download/v0.2.1/RELEASE_MANIFEST_v0.2.1.json",
+      "enabled": false,
+      "key": "manifest",
+      "kind": "release-manifest",
+      "label": "Machine-readable release manifest",
+      "name": "RELEASE_MANIFEST_v0.2.1.json",
+      "platform": "verification",
+      "sha256": null,
+      "size_bytes": null
+    },
+    {
+      "download_url": "https://github.com/CatalystNexusLLC/aurion_beta_launcher/releases/download/v0.2.1/SHA256SUMS.txt",
+      "enabled": false,
+      "key": "checksums",
+      "kind": "checksums",
+      "label": "SHA-256 checksums",
+      "name": "SHA256SUMS.txt",
+      "platform": "verification",
+      "sha256": null,
+      "size_bytes": null
+    }
+  ],
+  "components": [
+    {
+      "commit_sha": "a5e6a99dc78e5c67ea28682bbaff7fddd8c77146",
+      "repository": "CatalystNexusLLC/synapse_mcp",
+      "service_role": "synapse.brain",
+      "tag": "v2.0.0-alpha",
+      "version": "2.0.0-alpha"
+    },
+    {
+      "commit_sha": "2c8c7d92e767e4ba564a326ac8f1c3e1ad8673e4",
+      "repository": "CatalystNexusLLC/aurion_avatar",
+      "service_role": "aurion.interface",
+      "tag": "v1.1.0-alpha",
+      "version": "1.1.0-alpha"
+    },
+    {
+      "commit_sha": "ea950b079e14f4323902bde5ec5c3a3f8cbbcf4a",
+      "repository": "CatalystNexusLLC/aurion_arbiter",
+      "service_role": "aurion.workers",
+      "tag": "v0.1.0-alpha",
+      "version": "0.1.0-alpha"
+    }
+  ],
+  "generated_at": null,
+  "release_set": {
+    "approval_references": {
+      "owner_release_approval": null
+    },
+    "channel": "alpha",
+    "launcher_commit_sha": null,
+    "launcher_version": "0.2.1",
+    "license_id": "Catalyst-Nexus-AURION-External-Beta-Evaluation-License-0.2.1",
+    "license_sha256": null,
+    "license_url": null,
+    "manifest_sha256": null,
+    "package_built_at": null,
+    "permissions": {
+      "direct_package_download": false,
+      "offline_beta_testing": false,
+      "online_beta_testing": false,
+      "production_use": false,
+      "public_source_visibility": false,
+      "sponsorship_listing": false
+    },
+    "public_distribution_authorized": false,
+    "published_at": null,
+    "release_repository": "CatalystNexusLLC/aurion_beta_launcher",
+    "release_tag": "v0.2.1",
+    "release_url": "https://github.com/CatalystNexusLLC/aurion_beta_launcher/releases/tag/v0.2.1",
+    "status": "pending-authority",
+    "terms_sha256": "2bbbea4db70594425ddf95560c85b4c2ad8bbb35b533eee87ec07e8f67d2b317",
+    "terms_version": "AURION-BETA-TERMS-0.2.1"
+  },
+  "schema": "catalyst-nexus-aurion-beta-release/0.2.1"
+}

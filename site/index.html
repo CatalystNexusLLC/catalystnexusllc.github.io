@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Register for and download the Catalyst Nexus AURION Assistant Triad beta launcher.">
+  <title>AURION Assistant Beta 0.2.1 | Catalyst Nexus LLC</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="portal-config.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="topbar">
+    <div class="shell brandbar">
+      <a class="brand" href="#top" aria-label="AURION beta home">
+        <span class="mark" aria-hidden="true">A</span>
+        <span><strong>Catalyst Nexus LLC</strong><small>AURION Assistant Beta</small></span>
+      </a>
+      <nav aria-label="Primary">
+        <a href="#release">Release</a>
+        <a href="#register">Register</a>
+        <a href="#download">Download</a>
+        <a href="terms.html">Terms</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="shell hero-grid">
+        <div>
+          <p class="eyebrow">Launch version 0.2.1</p>
+          <h1>One launcher. Three local services. One identified assistant.</h1>
+          <p class="lead">Install and operate the SYNAPSE Brain, AURION Avatar, and AURION Arbiter from a minimal cross-platform dashboard. Each assistant receives its own folders, identifiers, version lock, logs, branches, worktrees, and ticket history.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#register">Join beta testing</a>
+            <a class="button secondary" id="public-source-link" href="https://github.com/CatalystNexusLLC/aurion_beta_launcher">Review public source</a>
+          </div>
+          <p class="fine">Offered by Catalyst Nexus LLC through Guy Grubbs, owner and authorized representative. Beta installation and continued operation are the downloader's responsibility.</p>
+        </div>
+        <aside class="status-panel" aria-label="Release status">
+          <div class="status-heading"><span>Release identity</span><span class="pill" id="release-state">Checking</span></div>
+          <dl>
+            <div><dt>Launcher</dt><dd>0.2.1</dd></div>
+            <div><dt>Tag</dt><dd><code>v0.2.1</code></dd></div>
+            <div><dt>Mode</dt><dd>Offline-first</dd></div>
+            <div><dt>Updates</dt><dd>Explicit opt-in</dd></div>
+          </dl>
+          <p id="release-message" class="status-copy">Loading the signed release catalog.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="release">
+      <div class="shell">
+        <div class="section-head">
+          <p class="eyebrow">Exact version lock</p>
+          <h2>Reviewable source across four repositories</h2>
+          <p>The launcher coordinates three independently versioned services without merging their Git histories, data roots, credentials, or change-control authority.</p>
+        </div>
+        <div class="repo-grid" id="repositories" aria-live="polite"></div>
+        <div class="callout">
+          <strong>Local-first operation.</strong> GitHub access, update discovery, ticket publication, cloud providers, and remote model use remain separate opt-in features. Closing the dashboard does not automatically stop services; use the Stop controls when background operation is not wanted.
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="register">
+      <div class="shell split">
+        <div>
+          <p class="eyebrow">Beta registration</p>
+          <h2>Bind a GitHub identity to an assistant installation</h2>
+          <p>GitHub sign-in records the immutable numeric account ID separately from the current username. A successful registration creates an installation UUID, coordination UUID, and requested <code>users/&lt;installation-id&gt;</code> branch in the launcher and three service repositories.</p>
+          <button class="button github" id="github-signin" type="button">Connect GitHub</button>
+          <div class="identity" id="identity" aria-live="polite">Not connected.</div>
+          <div class="profile-actions">
+            <button class="button secondary" id="export-profile" type="button" disabled>Download installer profile</button>
+            <span class="fine">The profile contains identifiers and version locks, not access tokens.</span>
+          </div>
+        </div>
+
+        <form class="card form-card" id="registration-form">
+          <div class="form-grid">
+            <label>Participation
+              <select name="participation_kind" required>
+                <option value="tester">Beta tester</option>
+                <option value="sponsor">Sponsor</option>
+                <option value="both">Tester and sponsor</option>
+              </select>
+            </label>
+            <label>Test mode
+              <select name="test_mode" required>
+                <option value="offline">Offline/local</option>
+                <option value="online">Connected GitHub</option>
+                <option value="both">Offline and connected</option>
+              </select>
+            </label>
+            <label>Platform
+              <select name="platform" required>
+                <option value="windows">Windows</option>
+                <option value="macos">macOS</option>
+                <option value="linux">Linux</option>
+                <option value="mixed">Mixed systems</option>
+              </select>
+            </label>
+            <label>Primary perspective
+              <select name="experience" required>
+                <option value="user">General user</option>
+                <option value="developer">Developer</option>
+                <option value="security">Security reviewer</option>
+                <option value="accessibility">Accessibility reviewer</option>
+                <option value="sponsor">Sponsor</option>
+              </select>
+            </label>
+          </div>
+          <label>Typed legal name
+            <input name="signer_name" minlength="2" maxlength="120" autocomplete="name" required>
+          </label>
+          <fieldset>
+            <legend>Required affirmative acknowledgements</legend>
+            <label class="check"><input type="checkbox" name="privacy_consent" required> I reviewed the <a href="privacy.html" target="_blank" rel="noopener">privacy notice</a>.</label>
+            <label class="check"><input type="checkbox" name="beta_and_no_warranty" required> I understand this is experimental beta software provided without guaranteed results.</label>
+            <label class="check"><input type="checkbox" name="installation_and_operation_responsibility" required> I choose to download, install, configure, run, monitor, update, or remove it at my responsibility.</label>
+            <label class="check"><input type="checkbox" name="background_services" required> I understand the three services can keep running after the launcher is minimized or closed.</label>
+            <label class="check"><input type="checkbox" name="backup_and_data_loss" required> I understand full removal or manual folder deletion can permanently destroy memory and training state.</label>
+            <label class="check"><input type="checkbox" name="release_license" required> I accept the release license and <a href="terms.html" target="_blank" rel="noopener">beta testing terms</a>.</label>
+            <label class="check"><input type="checkbox" name="electronic_signature" required> I intend my typed name and acceptance action to serve as my electronic signature.</label>
+            <label class="check"><input type="checkbox" name="legal_capacity_and_authority" required> I have legal capacity and authority to accept for myself or the organization I represent.</label>
+            <label class="check optional"><input type="checkbox" name="contact_consent"> Catalyst Nexus LLC may contact me about this beta.</label>
+          </fieldset>
+          <button class="button primary full" type="submit">Record beta registration</button>
+          <output id="registration-result" class="result" aria-live="polite"></output>
+        </form>
+      </div>
+    </section>
+
+    <section class="section" id="download">
+      <div class="shell">
+        <div class="section-head">
+          <p class="eyebrow">Direct GitHub release delivery</p>
+          <h2>Record checkout, then download from the exact release tag</h2>
+          <p>Packages are not mirrored by the portal. Authorized downloads point directly to immutable GitHub Release asset URLs and retain the release, asset, terms, license, branch, and timestamp snapshot in the checkout ledger.</p>
+        </div>
+        <div class="download-acks card">
+          <label class="check"><input id="checkout-license" type="checkbox"> I accept the release-specific license.</label>
+          <label class="check"><input id="checkout-integrity" type="checkbox"> I will verify the published SHA-256 before installation.</label>
+          <label class="check"><input id="checkout-responsibility" type="checkbox"> I accept responsibility for download, installation, operation, accounts, resources, and monitoring.</label>
+          <label class="check"><input id="checkout-data-loss" type="checkbox"> I understand removal can erase memory, training state, workspaces, tickets, and configuration unless separately backed up.</label>
+        </div>
+        <div class="asset-grid" id="assets"></div>
+        <output id="download-result" class="result" aria-live="polite"></output>
+      </div>
+    </section>
+
+    <section class="section risk">
+      <div class="shell risk-grid">
+        <div><p class="eyebrow">Removal boundary</p><h2>You control the local installation.</h2></div>
+        <div>
+          <p>You can stop or remove the software at any time. Software-only removal can preserve selected data. Full removal deletes the identified assistant folder and can permanently remove memory, embeddings, training or adaptation state, ticket history, repositories, logs, credentials, and evidence.</p>
+          <p><strong>Create and verify a backup before destructive removal. Deleted local state may not be recoverable.</strong></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-grid">
+      <div><strong>Catalyst Nexus LLC</strong><p>AURION Assistant Triad Beta Launcher 0.2.1</p></div>
+      <div><a href="terms.html">Beta terms</a><a href="privacy.html">Privacy notice</a><a href="https://github.com/CatalystNexusLLC/aurion_beta_launcher">GitHub source</a></div>
+    </div>
+  </footer>
+</body>
+</html>

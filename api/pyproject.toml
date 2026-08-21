@@ -1,0 +1,27 @@
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "aurion-beta-portal-api"
+version = "0.2.1"
+description = "GitHub identity, beta registration, and immutable release checkout API for the AURION portal."
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi==0.116.1",
+  "httpx==0.28.1",
+  "psycopg[binary,pool]==3.2.9",
+  "uvicorn[standard]==0.35.0"
+]
+
+[project.optional-dependencies]
+test = [
+  "pytest==8.4.1"
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["app"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
